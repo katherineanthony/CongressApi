@@ -3,9 +3,9 @@ package com.example.tacoapi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
     private Button ranSenator;
     private TextView repReturn;
     private TextView senReturn;
+    private TextView repParty;
+    private TextView repPositionTitle;
+    private TextView senParty;
+    private TextView senPositionTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         wireWidgets();
         setListeners();
     }
-//we wanna do the thingy with both so like there's two buttons and when there isn't one it will generate the other
+
     private void setListeners() {
         ranSenator.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                         .build();
                 CongressService congressService = retrofit.create(CongressService.class);
 
-                Call<Congress> senCall = congressService.getRandomRole("senator");
+                Call<Congress> senCall = congressService.getRandomRole("true","senator", "1");
 
                 senCall.enqueue(new Callback<Congress>() {
                     @Override
@@ -54,7 +58,17 @@ public class MainActivity extends AppCompatActivity {
                         // check if the body isn't null
                         if(foundCongress != null)
                         {
-                            senReturn.setText(foundCongress.toString());
+                            Object[] objs = (foundCongress.getObjects());
+                            Person personReturned = objs[0].getPerson();
+                            String name = personReturned.getName();
+
+                            senParty.setText(objs[0].getParty().toString());
+                            senPositionTitle.setText(objs[0].getTitle().toString());
+                            senReturn.setText(name);
+
+
+                            //partyTextView.setText(objs[0].getParty()) or whatever
+                            // ^ do the same with title yay
 
                         }
 
@@ -64,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onFailure(Call<Congress> call, Throwable t) {
                         Toast.makeText(MainActivity.this, t.getMessage(),
                                 Toast.LENGTH_SHORT).show();
+                        Log.d("sumthingThanksToJackson", "onFailure: " + t.getMessage());
 
                     }
                 });
@@ -78,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                         .build();
                 CongressService congressService = retrofit.create(CongressService.class);
 
-                Call<Congress> repCall = congressService.getRandomRole("representative");
+                Call<Congress> repCall = congressService.getRandomRole("true","representative", "1");
 
 
                 repCall.enqueue(new Callback<Congress>() {
@@ -92,7 +107,13 @@ public class MainActivity extends AppCompatActivity {
                         // check if the body isn't null
                         if(foundCongress != null)
                         {
-                            repReturn.setText(foundCongress.toString());
+                            Object[] objs = (foundCongress.getObjects());
+                            Person personReturned = objs[0].getPerson();
+                            String name = personReturned.getName();
+
+                            repParty.setText(objs[0].getParty());
+                            repPositionTitle.setText(objs[0].getTitle());
+                            repReturn.setText(name);
                         }
 
                     }
@@ -113,8 +134,13 @@ public class MainActivity extends AppCompatActivity {
     private void wireWidgets() {
         ranRep=findViewById(R.id.button_main_rep);
         ranSenator=findViewById(R.id.button_main_senator);
-        repReturn=findViewById(R.id.textView_main_rep);
-        senReturn=findViewById(R.id.textView_main_senator);
+        repReturn=findViewById(R.id.textView_main_nameRep);
+        senReturn=findViewById(R.id.textView_main_nameSen);
+        senPositionTitle=findViewById(R.id.textView_main_titleSen);
+        senParty=findViewById(R.id.textView_main_partySen);
+        repParty=findViewById(R.id.textView_main_partyRep);
+        repPositionTitle=findViewById(R.id.textView_main_titleRep);
+
 
 
     }

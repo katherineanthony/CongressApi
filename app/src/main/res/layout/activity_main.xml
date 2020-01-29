@@ -13,8 +13,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:text="Representative"
-        app:layout_constraintBottom_toTopOf="@+id/textView_main_rep"
+        app:layout_constraintBottom_toTopOf="@+id/textView_main_partyRep"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,32 +26,101 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:text="Senator"
-        app:layout_constraintBottom_toTopOf="@+id/textView_main_senator"
+        app:layout_constraintBottom_toTopOf="@+id/textView_main_partySen"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_main_rep" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_main_nameRep" />
 
     <TextView
-        android:id="@+id/textView_main_rep"
+        android:id="@+id/textView_main_partySen"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Party"
+        app:layout_constraintBottom_toTopOf="@+id/textView_main_titleSen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_main_senator" />
+
+    <TextView
+        android:id="@+id/textView_main_nameRep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:text="First and Last Name"
         app:layout_constraintBottom_toTopOf="@+id/button_main_senator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_main_titleRep" />
+
+    <TextView
+        android:id="@+id/textView_main_titleRep"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Position Title"
+        app:layout_constraintBottom_toTopOf="@+id/textView_main_nameRep"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_main_partyRep" />
+
+    <TextView
+        android:id="@+id/textView_main_partyRep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Party"
+        app:layout_constraintBottom_toTopOf="@+id/textView_main_titleRep"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_main_rep" />
 
     <TextView
-        android:id="@+id/textView_main_senator"
+        android:id="@+id/textView_main_titleSen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:text="Position Title"
+        app:layout_constraintBottom_toTopOf="@+id/textView_main_nameSen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_main_partySen" />
+
+    <TextView
+        android:id="@+id/textView_main_nameSen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="First and Last Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_main_senator" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_main_titleSen" />
+
+    <Switch
+        android:id="@+id/switch_main_democrat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Democrat"
+        app:layout_constraintBottom_toTopOf="@+id/switch_main_republican"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:layout_editor_absoluteX="303dp" />
+
+    <Switch
+        android:id="@+id/switch_main_republican"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Republican"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch_main_democrat"
+        tools:layout_editor_absoluteX="303dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
