@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
     private TextView repPositionTitle;
     private TextView senParty;
     private TextView senPositionTitle;
+    //private Switch republican;
+    //private Switch democrat;
+   // private boolean isRepublican;
+    //private boolean isDemocratic;
+    private int range;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +40,24 @@ public class MainActivity extends AppCompatActivity {
 
         wireWidgets();
         setListeners();
+
+        //isRepublican=false;
+        //isDemocratic=false;
     }
 
     private void setListeners() {
+        /**republican.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                isRepublican=true;
+            }
+        });
+        democrat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                isDemocratic=true;
+            }
+        });*/
         ranSenator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,7 +67,25 @@ public class MainActivity extends AppCompatActivity {
                         .build();
                 CongressService congressService = retrofit.create(CongressService.class);
 
-                Call<Congress> senCall = congressService.getRandomRole("true","senator", "1");
+                /**boolean isRepublican2;
+                String result= "";
+                if(isRepublican){
+                    isRepublican2=true;
+                    result="republican";
+                    range=53;
+                }
+                else if(isDemocratic){
+                    isRepublican2=false;
+                    result="democratic";
+                    range=45;
+                }
+                else{
+                    range=80;
+                }*/
+
+
+
+                Call<Congress> senCall = congressService.getRandomRole("true","senator");
 
                 senCall.enqueue(new Callback<Congress>() {
                     @Override
@@ -53,17 +93,19 @@ public class MainActivity extends AppCompatActivity {
                         /**
                          ANY CODE THAT DEPENDS ON THE RESULT OF THE
                          SEARCH HAS TO GO HERE */
+                        //int senatorNumber = (int)(Math.random()*range + 1);
 
                         Congress foundCongress = response.body();
                         // check if the body isn't null
                         if(foundCongress != null)
                         {
                             Object[] objs = (foundCongress.getObjects());
-                            Person personReturned = objs[0].getPerson();
+                            int length = (int)((objs.length -1)*Math.random() + 1);
+                            Person personReturned = objs[length].getPerson();
                             String name = personReturned.getName();
 
-                            senParty.setText(objs[0].getParty().toString());
-                            senPositionTitle.setText(objs[0].getTitle().toString());
+                            senParty.setText(objs[length].getParty().toString());
+                            senPositionTitle.setText(objs[length].getTitle().toString());
                             senReturn.setText(name);
 
 
@@ -93,7 +135,24 @@ public class MainActivity extends AppCompatActivity {
                         .build();
                 CongressService congressService = retrofit.create(CongressService.class);
 
-                Call<Congress> repCall = congressService.getRandomRole("true","representative", "1");
+                /**boolean isRepublican2;
+                String result= "";
+                if(isRepublican){
+                    isRepublican2=true;
+                    result="republican";
+                    range=100;
+                }
+                else if(isDemocratic){
+                    isRepublican2=false;
+                    result="democratic";
+                    range=100;
+                }
+                else{
+                    range=50;
+                }
+                //String representativeNumber = Integer.toString((int)(Math.random()*range + 1));*/
+
+                Call<Congress> repCall = congressService.getRandomRole("true","representative");
 
 
                 repCall.enqueue(new Callback<Congress>() {
@@ -102,17 +161,19 @@ public class MainActivity extends AppCompatActivity {
                         /**
                          ANY CODE THAT DEPENDS ON THE RESULT OF THE
                          SEARCH HAS TO GO HERE */
+                        //int representativeNumber = (int)(Math.random()* + 1);
 
                         Congress foundCongress = response.body();
                         // check if the body isn't null
                         if(foundCongress != null)
                         {
                             Object[] objs = (foundCongress.getObjects());
-                            Person personReturned = objs[0].getPerson();
+                            int length = (int)((objs.length -1)*Math.random() + 1);
+                            Person personReturned = objs[length].getPerson();
                             String name = personReturned.getName();
 
-                            repParty.setText(objs[0].getParty());
-                            repPositionTitle.setText(objs[0].getTitle());
+                            repParty.setText(objs[length].getParty());
+                            repPositionTitle.setText(objs[length].getTitle());
                             repReturn.setText(name);
                         }
 
@@ -140,6 +201,8 @@ public class MainActivity extends AppCompatActivity {
         senParty=findViewById(R.id.textView_main_partySen);
         repParty=findViewById(R.id.textView_main_partyRep);
         repPositionTitle=findViewById(R.id.textView_main_titleRep);
+        //republican=findViewById(R.id.switch_main_republican);
+        //democrat=findViewById(R.id.switch_main_democrat);
 
 
 

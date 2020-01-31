@@ -4,6 +4,7 @@ public class Congress {
     private String message;
     private String status;
     private Object[] objects;
+    private String party;
 
     public Congress() {
     }
@@ -30,5 +31,13 @@ public class Congress {
 
     public void setObjects(Object[] objects) {
         this.objects = objects;
+    }
+
+    public String getParty() {
+        return party;
+    }
+
+    public void setParty(String party) {
+        this.party = party;
     }
 }

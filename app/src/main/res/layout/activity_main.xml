@@ -110,6 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Democrat"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/switch_main_republican"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
@@ -120,6 +121,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Republican"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch_main_democrat"
         tools:layout_editor_absoluteX="303dp" />
